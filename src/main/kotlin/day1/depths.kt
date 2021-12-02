@@ -1,7 +1,7 @@
 package day1
 
-fun increasing(depths: Iterable<Int>): Int =
+fun increasing(depths: Sequence<Int>): Int =
     depths.zipWithNext().count { (last, current) -> current > last }
 
-fun windowedSum(depths: Iterable<Int>, size: Int): List<Int> =
+fun windowedSum(depths: Sequence<Int>, size: Int): Sequence<Int> =
     depths.windowed(size).map(List<Int>::sum)
