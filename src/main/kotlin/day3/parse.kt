@@ -8,7 +8,7 @@ fun parse(input: String): IntArray =
 fun getCodes(): Sequence<IntArray> =
     getLines("day3").map(::parse)
 
-fun getTotals(input: Sequence<IntArray>): Pair<Int, IntArray> {
+fun countBits(input: Sequence<IntArray>): Pair<Int, IntArray> {
     val codes = input.iterator()
     val first = Pair(1, codes.next())
 
