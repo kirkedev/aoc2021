@@ -1,7 +1,7 @@
 package day6
 
 import lib.getLines
-import java.util.*
+import java.util.LinkedList
 
 fun parse(input: String): LongArray =
     input.split(',')

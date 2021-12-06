@@ -1,7 +1,7 @@
-import org.junit.jupiter.api.Test
-import org.assertj.core.api.Assertions.assertThat
 import day1.increasing
 import day1.windowedSum
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
 
 class Day1Test {
     @Test

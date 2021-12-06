@@ -2,6 +2,7 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 
 plugins {
     kotlin("jvm") version "1.6.0"
+    id("org.jmailen.kotlinter") version "3.7.0"
 }
 
 group = "dev.kirke"

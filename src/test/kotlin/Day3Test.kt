@@ -1,4 +1,8 @@
-import day3.*
+import day3.countBits
+import day3.oxygen
+import day3.pack
+import day3.parse
+import day3.scrubber
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
