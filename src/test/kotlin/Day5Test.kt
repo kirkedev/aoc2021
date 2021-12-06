@@ -70,15 +70,23 @@ class Day5Test {
     }
 
     @Test
-    fun `draw a line`() {
+    fun `draw a straight line`() {
         val line = Line(Point(0, 9), Point(5, 9))
-        val plot = Plot(10, 10)
-        plot.draw(line)
+        val plot = Plot(10, 10).draw(line)
+
+        assertThat(plot.points.count { it > 0 }).isEqualTo(6)
         assertThat(line.points.map(plot::get).all { it == 1 }).isTrue
     }
 
     @Test
-    fun `draw overlapping lines`() {
+    fun `draw a diagonal line`() {
+        val plot = Plot(10, 10).draw(Line(Point(1, 1), Point(3, 3)))
+        assertThat(plot.points.count { it > 0 }).isEqualTo(3)
+        assertThat(sequenceOf(Point(1, 1), Point(2, 2), Point(3, 3)).map(plot::get).all { it == 1 }).isTrue
+    }
+
+    @Test
+    fun `draw overlapping straight lines`() {
         val plot = sequenceOf(
             Line(Point(0, 9), Point(5, 9)),
             Line(Point(8, 0), Point(0, 8)),
@@ -95,5 +103,25 @@ class Day5Test {
         }
 
         assertThat(plot.points.count { point -> point > 1 }).isEqualTo(5)
+    }
+
+    @Test
+    fun `draw overlapping lines`() {
+        val plot = sequenceOf(
+            Line(Point(0, 9), Point(5, 9)),
+            Line(Point(8, 0), Point(0, 8)),
+            Line(Point(9, 4), Point(3, 4)),
+            Line(Point(2, 2), Point(2, 1)),
+            Line(Point(7, 0), Point(7, 4)),
+            Line(Point(6, 4), Point(2, 0)),
+            Line(Point(0, 9), Point(2, 9)),
+            Line(Point(3, 4), Point(1, 4)),
+            Line(Point(0, 0), Point(8, 8)),
+            Line(Point(5, 5), Point(8, 2))
+        ).fold(Plot(10, 10)) { plot, line ->
+            plot.draw(line)
+        }
+
+        assertThat(plot.points.count { point -> point > 1 }).isEqualTo(12)
     }
 }

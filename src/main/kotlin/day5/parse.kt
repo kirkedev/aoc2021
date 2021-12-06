@@ -17,19 +17,16 @@ data class Line(
 
     val points: Sequence<Point>
         get() = sequence {
-            val run = end.first.minus(start.first).let { delta ->
-                IntProgression.fromClosedRange(start.first, end.first, if (delta < 0) -1 else 1)
+            val dx = end.first.compareTo(start.first)
+            val dy = end.second.compareTo(start.second)
+            var point = start.copy()
+
+            while (point != end) {
+                yield(point)
+                point = Point(point.first + dx, point.second + dy)
             }
 
-            val rise = end.second.minus(start.second).let { delta ->
-                IntProgression.fromClosedRange(start.second, end.second, if (delta < 0) -1 else 1)
-            }
-
-            for (x in run) {
-                for (y in rise) {
-                    yield(Point(x, y))
-                }
-            }
+            yield(point)
         }
 }
 
