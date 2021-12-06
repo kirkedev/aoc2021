@@ -20,7 +20,7 @@ class Board(val numbers: IntArray) {
     private val marks: Sequence<Boolean>
         get() = numbers.asSequence().map { square -> called.indexOf(square) > -1 }
 
-    val squares: Sequence<Square>
+    private val squares: Sequence<Square>
         get() = numbers.asSequence().zip(marks)
 
     val rows: Sequence<List<Square>>

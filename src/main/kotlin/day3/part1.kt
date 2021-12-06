@@ -6,12 +6,6 @@ fun pack(booleans: Iterable<Boolean>): UInt =
     }
 
 fun main() {
-    val modes = countBits(getCodes()).let { (count, totals) ->
-        totals.map { if (it > count / 2) 1 else 0 }
-    }
-
-    val gamma = pack(modes.map { it == 1 })
-    val epsilon = pack(modes.map { it == 0 })
-
-    println(gamma * epsilon)
+    val modes = countBits(getCodes()).let { (count, totals) -> totals.map { it > count / 2 } }
+    println(pack(modes) * pack(modes.map(Boolean::not)))
 }

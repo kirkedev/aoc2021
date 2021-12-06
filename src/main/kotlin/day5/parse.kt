@@ -31,7 +31,7 @@ data class Line(
 }
 
 fun parse(line: String): Line {
-    val (x1, y1, x2, y2) = line.split(" -> ").flatMap { it.split(",").map(String::toInt) }
+    val (x1, y1, x2, y2) = line.split(" -> ").flatMap { it.split(',').map(String::toInt) }
     return Line(Point(x1, y1), Point(x2, y2))
 }
 
