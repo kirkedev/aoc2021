@@ -9,7 +9,7 @@ fun aggregateMoves(positions: List<Int>, position: Int): Int =
 
 fun main() =
     getCrabs().let { positions ->
-        IntRange(0, positions.maxOrNull() ?: 0).minOf { position ->
+        0.rangeTo(positions.maxOrNull() ?: 0).minOf { position ->
             aggregateMoves(positions, position)
         }
     }.run(::println)

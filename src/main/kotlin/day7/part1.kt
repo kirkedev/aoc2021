@@ -10,7 +10,7 @@ fun move(positions: List<Int>, to: Int): Int =
 
 fun main() =
     getCrabs().let { positions ->
-        IntRange(0, positions.maxOrNull() ?: 0).minOf { position ->
+        0.rangeTo(positions.maxOrNull() ?: 0).minOf { position ->
             move(positions, position)
         }
     }.run(::println)

@@ -7,21 +7,18 @@ fun parse(input: String): LongArray =
     input.split(',')
         .map(String::toInt)
         .fold(LongArray(9)) { totals, timer ->
-            totals[timer] += 1L
-            totals
+            totals.apply { set(timer, get(timer) + 1L) }
         }
 
 fun getFish(): LongArray =
     getLines("day6").first().run(::parse)
 
-fun population(start: LongArray): Sequence<Long> = sequence {
-    val state = LinkedList(start.toList())
-
-    while (true) {
-        yield(state.sum())
-
-        val spawned = state.remove()
-        state.add(spawned)
-        state[6] += spawned
-    }
-}
+fun population(start: LongArray): Sequence<Long> =
+    generateSequence(LinkedList(start.toList())) { states ->
+        states.remove().let { spawned ->
+            states.apply {
+                add(spawned)
+                set(6, get(6) + spawned)
+            }
+        }
+    }.map(List<Long>::sum)

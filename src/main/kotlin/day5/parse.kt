@@ -18,23 +18,26 @@ data class Line(
     val isStraight: Boolean
         get() = isVertical || isHorizontal
 
-    val points: Sequence<Point>
-        get() {
-            val dx = end.first.compareTo(start.first)
-            val dy = end.second.compareTo(start.second)
+    private val dx: Int
+        get() = end.first.compareTo(start.first)
 
-            return Pair(dx, dy).let { delta ->
-                generateSequence(start::copy) { point ->
-                    takeUnless { point == end }?.let { point + delta }
-                }
+    private val dy: Int
+        get() = end.second.compareTo(start.second)
+
+    val points: Sequence<Point>
+        get() = Point(dx, dy).let { delta ->
+            generateSequence(start::copy) { point ->
+                point.takeUnless(end::equals)?.let(delta::plus)
             }
         }
 }
 
-fun parse(line: String): Line {
-    val (x1, y1, x2, y2) = line.split(" -> ").flatMap { it.split(',').map(String::toInt) }
-    return Line(Point(x1, y1), Point(x2, y2))
-}
+fun parse(line: String): Line =
+    line.split(" -> ").flatMap {
+        it.split(',').map(String::toInt)
+    }.let { (x1, y1, x2, y2) ->
+        Line(Point(x1, y1), Point(x2, y2))
+    }
 
 fun parseLines(input: Sequence<String>) =
     input.map(::parse)

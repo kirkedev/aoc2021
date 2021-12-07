@@ -45,8 +45,8 @@ class Board(val numbers: IntArray) {
 
         return when (matches.size) {
             0 -> this
-            1 -> called.add(matches[0]).let { this }
-            else -> called.addAll(matches).let { this }
+            1 -> apply { called.add(matches[0]) }
+            else -> apply { called.addAll(matches) }
         }
     }
 }
