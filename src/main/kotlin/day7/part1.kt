@@ -8,8 +8,9 @@ fun move(from: Int, to: Int): Int =
 fun move(positions: List<Int>, to: Int): Int =
     positions.sumOf { move(it, to) }
 
-fun main() = getCrabs().let { positions ->
-    IntRange(0, positions.maxOf { it })
-        .minOf { position -> move(positions, position) }
-        .run(::println)
-}
+fun main() =
+    getCrabs().let { positions ->
+        IntRange(0, positions.maxOrNull() ?: 0).minOf { position ->
+            move(positions, position)
+        }
+    }.run(::println)
