@@ -18,7 +18,7 @@ fun population(start: LongArray): Sequence<Long> = sequence {
     val state = LinkedList(start.toList())
 
     while (true) {
-        yield(state.toLongArray().sum())
+        yield(state.sum())
 
         val spawned = state.remove()
         state.add(spawned)
