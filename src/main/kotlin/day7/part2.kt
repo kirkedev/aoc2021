@@ -2,8 +2,8 @@ package day7
 
 fun aggregateMoves(positions: List<Int>, position: Int): Int =
     positions.sumOf {
-        IntRange(minOf(it, position), maxOf(it, position)).sumOf { step ->
-            move(it, step)
+        distance(it, position).let { distance ->
+            distance * distance.inc() / 2
         }
     }
 

@@ -2,11 +2,11 @@ package day7
 
 import kotlin.math.abs
 
-fun move(from: Int, to: Int): Int =
+fun distance(from: Int, to: Int): Int =
     abs(to - from)
 
 fun move(positions: List<Int>, to: Int): Int =
-    positions.sumOf { move(it, to) }
+    positions.sumOf { distance(it, to) }
 
 fun main() =
     getCrabs().let { positions ->
