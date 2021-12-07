@@ -12,7 +12,7 @@ fun parse(input: String): LongArray =
         }
 
 fun getFish(): LongArray =
-    parse(getLines("day6").first())
+    getLines("day6").first().run(::parse)
 
 fun population(start: LongArray): Sequence<Long> = sequence {
     val state = LinkedList(start.toList())
