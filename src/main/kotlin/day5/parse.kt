@@ -2,6 +2,9 @@ package day5
 
 typealias Point = Pair<Int, Int>
 
+operator fun Point.plus(other: Point): Point =
+    Point(this.first + other.first, this.second + other.second)
+
 data class Line(
     val start: Point,
     val end: Point
@@ -16,17 +19,15 @@ data class Line(
         get() = isVertical || isHorizontal
 
     val points: Sequence<Point>
-        get() = sequence {
+        get() {
             val dx = end.first.compareTo(start.first)
             val dy = end.second.compareTo(start.second)
-            var point = start.copy()
 
-            while (point != end) {
-                yield(point)
-                point = Point(point.first + dx, point.second + dy)
+            return Pair(dx, dy).let { delta ->
+                generateSequence(start::copy) { point ->
+                    takeUnless { point == end }?.let { point + delta }
+                }
             }
-
-            yield(point)
         }
 }
 
